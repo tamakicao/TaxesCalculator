@@ -12,13 +12,15 @@ and the total amounts of sales taxes paid.
 >* Tax and Price should be rounded to 2 decimal places.  
 ##Requirements  
 * ###Non-Functional Requirements  
->Sales Taxes Calculator is written in **Java** with an associated GUI and is intended to run on a PC running Windows or macOS.  
+>Sales Taxes Calculator shall be written in **Java** with an associated GUI.  
 * ###Functional Requirements  
 >* The program must provide a usage guide.  
 >* The program must allow the user to enter product information including product name, quantity, unit shelf price.
 >* The program must be able to determine the applicable tax rate.  
 >* The program must round up the tax to the nearest 0.05.  
->* The program must round up to two decimal places for all calculations.
+>* The program must round up to two decimal places for all calculations.  
+>* The program must calculate the gross price and the tax to be paid of the item.  
+>* The program must calculate the total cost of all items and the total amounts of sales taxes.
 >* The program must allow the user to add more items into the shopping cart.
 >* The program must allow the user to edit the shopping cart.
 >* The program must prevent the user from completing the shopping when the cart is empty.

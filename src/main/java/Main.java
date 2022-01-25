@@ -21,7 +21,6 @@ public class Main extends Application {
         stage.setTitle("Sales Taxes Calculator");
         stage.setScene(scene);
         stage.show();
-
     }
 
 }
