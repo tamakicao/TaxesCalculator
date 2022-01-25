@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ItemDetails.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">TaxesCalculator</a> &gt; <a href="index.source.html" class="el_package">default</a> &gt; <span class="el_source">ItemDetails.java</span></div><h1>ItemDetails.java</h1><pre class="source lang-java linenums">public class ItemDetails {
+    String name;
+    int quantity;
+    double unitPrice;
+    boolean exempt;
+    boolean imported;
+
+    double rate;
+    double price;
+    double tax;
+<span class="fc" id="L11">    String lineItem=&quot;&quot;;</span>
+
+<span class="fc" id="L13">    static StringBuilder receipt= new StringBuilder();</span>
+    static double sumPrice;
+    static double sumTax;
+
+<span class="fc" id="L17">    public ItemDetails (String n, int q, double u,boolean i, boolean e){</span>
+<span class="fc" id="L18">        this.name=n;</span>
+<span class="fc" id="L19">        this.quantity=q;</span>
+<span class="fc" id="L20">        this.unitPrice=u;</span>
+<span class="fc" id="L21">        this.imported=i;</span>
+<span class="fc" id="L22">        this.exempt=e;</span>
+<span class="fc" id="L23">    }</span>
+
+    //rounding rules
+    //round up to the nearest 0.05
+    public static double roundingRules1(double d1) {
+<span class="fc" id="L28">        return Math.ceil((d1 / 0.05)) * 0.05;</span>
+    }
+
+    //round to 2 decimal places
+    public static double roundingRules2(double d2) {
+<span class="fc" id="L33">        return (double) Math.round(d2 * 100) / 100;</span>
+    }
+
+    public void calculate() {
+<span class="fc" id="L37">        name = name.trim();</span>
+<span class="fc bfc" id="L38" title="All 2 branches covered.">        if (quantity &gt; 1){</span>
+<span class="fc" id="L39">            name  = name + &quot;s&quot;;</span>
+        }
+        //determine tax rate
+<span class="fc bfc" id="L42" title="All 2 branches covered.">        if (imported) {</span>
+<span class="fc" id="L43">            rate += 0.05;</span>
+<span class="fc" id="L44">            name = &quot;imported &quot; + name;</span>
+        }
+<span class="fc bfc" id="L46" title="All 2 branches covered.">        if (!exempt) {</span>
+<span class="fc" id="L47">            rate += 0.1;</span>
+<span class="fc" id="L48">            rate = roundingRules2(rate);</span>
+        }
+
+        //calculate taxes and end-price
+        //tax = rate * unitPrice * quantity;
+        //tax = roundingRules2(roundingRules1(tax));
+<span class="fc" id="L54">        tax = rate * unitPrice;</span>
+<span class="fc" id="L55">        tax = roundingRules1(tax);</span>
+<span class="fc" id="L56">        tax = roundingRules2(tax * quantity);</span>
+<span class="fc" id="L57">        price = unitPrice * quantity + tax;</span>
+<span class="fc" id="L58">        price = roundingRules2(price);</span>
+
+        //add item to receipt
+<span class="fc" id="L61">        lineItem += quantity + &quot; &quot; + name + &quot; at &quot; + price + &quot;\n&quot;;</span>
+<span class="fc" id="L62">        receipt.append(lineItem);</span>
+<span class="fc" id="L63">        sumPrice = roundingRules2(sumPrice + price);</span>
+<span class="fc" id="L64">        sumTax = roundingRules2(sumTax+tax);</span>
+<span class="fc" id="L65">    }</span>
+
+    public String updateReceipt(){
+<span class="fc" id="L68">        receipt.append(&quot;\nSales Taxes: &quot;).append(sumTax).append(&quot;\nTotal: &quot;).append(sumPrice);</span>
+<span class="fc" id="L69">        return receipt.toString();</span>
+    }
+
+    public void initialSumPrice(){
+<span class="fc" id="L73">        sumPrice = 0;</span>
+<span class="fc" id="L74">    }</span>
+
+    public void initialSumTax(){
+<span class="fc" id="L77">        sumTax = 0;</span>
+<span class="fc" id="L78">    }</span>
+
+    public void initialReceipt(){
+<span class="fc" id="L81">        receipt.delete(0,receipt.length());</span>
+<span class="fc" id="L82">    }</span>
+}
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

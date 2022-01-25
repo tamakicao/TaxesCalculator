@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="600.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="SceneController">
+   <Text layoutX="27.0" layoutY="40.0" lineSpacing="5.0" strokeType="OUTSIDE" strokeWidth="0.0"
+         text="Welcome to your Sales Taxes Calculator!&#10;&#10;It's easy to start your shopping:&#10;&#10;Enter the item name, quantity and unit price.&#10;&#10;Choose the appropriate options to help your calculator determine the tax rate. &#10;&#10;Edit your shopping cart by clicking on 'More items' or the trash bin icon. &#10;&#10;Click 'Done' to end the shopping and get your receipt.&#10;&#10;That's it!&#10;&#10;Now, click 'Start' and enjoy!"
+         wrappingWidth="450.0">
+      <font>
+         <Font name="Arial Bold" size="18.0"/>
+      </font>
+   </Text>
+   <Button layoutX="200.0" layoutY="530.0" minHeight="30.0" mnemonicParsing="false" onAction="#toShoppingCart"
+           prefWidth="100.0" text="Start">
+      <font>
+         <Font name="Arial Bold" size="14.0"/>
+      </font>
+   </Button>
+</AnchorPane>
